@@ -395,12 +395,15 @@ def main():
     def _split(header):
         header = header.split(':')
 
-        if len(header) != 2:
+        if header and len(header) < 2:
             print("A header must be of the form name:value")
             parser.print_usage()
             sys.exit(0)
 
-        return header
+        header_name = header[0]
+        header_v = ':'.join(header[1:])
+
+        return [header_name, header_v]
 
     if args.header is None:
         headers = {}
